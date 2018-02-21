@@ -39,19 +39,21 @@ mergesort:
 	.type	sortsub,@function
 sortsub:
 	.cfi_startproc
-	pushq	%rbp
+	pushq	%rbp # Pushes address of base pointer to call stack to allow program to return to main function.
 .Lcfi3:
 	.cfi_def_cfa_offset 16
 .Lcfi4:
 	.cfi_offset %rbp, -16
-	movq	%rsp, %rbp
+	movq	%rsp, %rbp # Sets new base pointer of new stack frame (corresponding to sortsub function) by
+					   # moving the value of the stack pointer into the base pointer
 .Lcfi5:
 	.cfi_def_cfa_register %rbp
-	subq	$64, %rsp
-	movq	%rdi, -8(%rbp)
-	movq	%rsi, -16(%rbp)
-	movq	%rdx, -24(%rbp)
-	movq	%rcx, -32(%rbp)
+	subq	$64, %rsp # Stack pointer is decremented by 64 to allocate 64 bytes for local variable use
+				      # and the stack frames of the functions called within subsort
+	movq	%rdi, -8(%rbp) # Moves value of void* arr parameter stored in rdi to the address offset by 8 bytes from base pointer
+	movq	%rsi, -16(%rbp) # Moves value of long size parameter stored in rsi to the address offset by 16 bytes from the base pointer
+	movq	%rdx, -24(%rbp) # Moves value of long left parameter stored in rdx to the address offset by 24 bytes from the base pointer
+	movq	%rcx, -32(%rbp) # Moves value of long right parameter stored in rcx to the address offset by 32 bytes from the base pointer
 	movq	%r8, -40(%rbp)
 	movq	-32(%rbp), %rcx
 	subq	-24(%rbp), %rcx
