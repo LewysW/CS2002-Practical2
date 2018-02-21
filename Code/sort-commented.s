@@ -97,9 +97,9 @@ sortsub:
 	movq	-40(%rbp), %r9 # Moves the value of the comp variable into register r9
 	callq	merge # Calls the merge function
 .LBB1_2:
-	addq	$64, %rsp
-	popq	%rbp
-	retq
+	addq	$64, %rsp # Stack pointer is incremented by 64 to deallocate the 64 bytes used by the sortsub stackframe
+	popq	%rbp # pops the return address of the mergesort function off of the call stack to return
+	retq # returns to parent function mergesort
 .Lfunc_end1:
 	.size	sortsub, .Lfunc_end1-sortsub
 	.cfi_endproc
