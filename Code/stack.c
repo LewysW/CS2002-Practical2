@@ -16,18 +16,22 @@ void print_stack() {
     //Prints previous base pointer.
     printf("RBP1 %lx\n\n", rbp1);
 
-    printf("ADDRESS,       OFFSET,  VALUE OF QUADWORD\n");
+    //Calls method to print 3 stack frames
+    print_frame(rbp, rbp1, 3);
+}
+
+//Prints out the address, offset and value of each quadword in the stack frame
+void print_frame(long rbp, long rbp1, int frames) {
+    printf("\nADDRESS,       OFFSET,  VALUE OF QUADWORD\n");
     int i = 0;
 
+    //Repeat while the value of the address with the offset i is not equal to the current base pointer
     while ((rbp1 - i) != rbp) {
+        //Prints address, offset and value of quadword
         printf("%lx, -%i(%rbp), %li\n", (rbp1 - i), i,*((long*) (rbp1 - i)));
         i += 8;
     }
 
-
-
-}
-
-void printFrame() {
-    
+    //Number of frames to print is greater than 1 then call print_frame and decrement frames.
+    if (frames > 1) print_frame(rbp1, *((long*) rbp1), --frames);
 }
