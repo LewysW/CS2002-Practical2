@@ -98,7 +98,7 @@ sortsub:
 	callq	merge # Calls the merge function
 .LBB1_2:
 	addq	$64, %rsp # Stack pointer is incremented by 64 to deallocate the 64 bytes used by the sortsub stackframe
-	popq	%rbp # pops the return address of the mergesort function off of the call stack to return
+	popq	%rbp # pops the return address of the mergesort function off of the call stack to rbp to return
 	retq # returns to parent function mergesort
 .Lfunc_end1:
 	.size	sortsub, .Lfunc_end1-sortsub
