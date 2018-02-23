@@ -45,56 +45,56 @@ sortsub:
 .Lcfi4:
 	.cfi_offset %rbp, -16
 	movq	%rsp, %rbp # Sets new base pointer of new stack frame (corresponding to sortsub function) by
-					   # moving the value of the stack pointer into the base pointer
+					   # copying the value of the stack pointer into the base pointer
 .Lcfi5:
 	.cfi_def_cfa_register %rbp
 	subq	$64, %rsp # Stack pointer is decremented by 64 to allocate 64 bytes for local variable use
 				      # and the stack frames of the functions called within subsort
   # Below are local variable values retrieved from parameters in sort sub
-	movq	%rdi, -8(%rbp) # Moves value of void* arr parameter stored in rdi to the address offset by 8 bytes from base pointer
-	movq	%rsi, -16(%rbp) # Moves value of long size parameter stored in rsi to the address offset by 16 bytes from the base pointer
-	movq	%rdx, -24(%rbp) # Moves value of long left parameter stored in rdx to the address offset by 24 bytes from the base pointer
-	movq	%rcx, -32(%rbp) # Moves value of long right parameter stored in rcx to the address offset by 32 bytes from the base pointer
-	movq	%r8, -40(%rbp) # Moves value of long (*comp) parameter stored in r8 to the address offset by 40 bytes from the base pointer
-	movq	-32(%rbp), %rcx # Moves the value of the right variable into rcx
+	movq	%rdi, -8(%rbp) # copies value of void* arr parameter stored in rdi to the address offset by 8 bytes from base pointer
+	movq	%rsi, -16(%rbp) # copies value of long size parameter stored in rsi to the address offset by 16 bytes from the base pointer
+	movq	%rdx, -24(%rbp) # copies value of long left parameter stored in rdx to the address offset by 24 bytes from the base pointer
+	movq	%rcx, -32(%rbp) # copies value of long right parameter stored in rcx to the address offset by 32 bytes from the base pointer
+	movq	%r8, -40(%rbp) # copies value of long (*comp) parameter stored in r8 to the address offset by 40 bytes from the base pointer
+	movq	-32(%rbp), %rcx # copies the value of the right variable into rcx
 	subq	-24(%rbp), %rcx # Subtracts the value of the variable left from the variable right (the value in rcx) in the conditional statement
 	cmpq	$1, %rcx # Compares the value of 1 and the value of rcx (the result of subtracting left from right)
 	jle	.LBB1_2
-	movl	$2, %eax # Moves the value 2 into the register eax (this is the value the mid expression is divied by in sortsub)
-	movl	%eax, %ecx # Moves the value of register eax (2) into the register ecx.
-	movq	-24(%rbp), %rdx # Moves the value of the Left variable into register rdx
-	movq	-32(%rbp), %rsi # Moves the value of the right variable into register rsi
+	movl	$2, %eax # copies the value 2 into the register eax (this is the value the mid expression is divied by in sortsub)
+	movl	%eax, %ecx # copies the value of register eax (2) into the register ecx.
+	movq	-24(%rbp), %rdx # copies the value of the Left variable into register rdx
+	movq	-32(%rbp), %rsi # copies the value of the right variable into register rsi
 	subq	-24(%rbp), %rsi # Subtracts the value of the left variable from the value of the right variable during assignment of mid variable
-	movq	%rsi, %rax # Moves the result of right - left  into the register rax
-	movq	%rdx, -56(%rbp) # Moves the value of left stored in rdx to the address offset 56 bytes from the base pointer
+	movq	%rsi, %rax # copies the result of right - left  into the register rax
+	movq	%rdx, -56(%rbp) # copies the value of left stored in rdx to the address offset 56 bytes from the base pointer
 	cqto # Sign extends the two register values edx:eax (64 bit integer) to be used in a division to allow for extra precision
 	idivq	%rcx # Divides the value of rcx (the result of right - left) by edx:eax which is 2 due to earlier assignment.
 						 # Corresponds to dvision during assignment of mid
-	movq	-56(%rbp), %rcx # Moves the value of left into register rcx
+	movq	-56(%rbp), %rcx # copies the value of left into register rcx
 	addq	%rax, %rcx # Adds values of left and result of (right - left) / 2 during assignment of mid
-	movq	%rcx, -48(%rbp) # Moves value of mid (result of left + (right - left) / 2) into address offset by 48 bytes from rbp
+	movq	%rcx, -48(%rbp) # copies value of mid (result of left + (right - left) / 2) into address offset by 48 bytes from rbp
 	# Parameters for first sortsub call:
-	movq	-8(%rbp), %rdi # Moves value of arr variable into register rdi in preperation for sortsub call
-	movq	-16(%rbp), %rsi # Moves value of size variable into register rsi in preperation for sortsub call
-	movq	-24(%rbp), %rax # Moves value of left variable into register rax in preperation for sortsub call
-	movq	-48(%rbp), %rcx # Moves value of mid variable into register rcx in preperation for sortsub call
-	movq	-40(%rbp), %r8 # Moves value of comp variable into register r8 in preperation for sortsub call
+	movq	-8(%rbp), %rdi # copies value of arr variable into register rdi in preperation for sortsub call
+	movq	-16(%rbp), %rsi # copies value of size variable into register rsi in preperation for sortsub call
+	movq	-24(%rbp), %rax # copies value of left variable into register rax in preperation for sortsub call
+	movq	-48(%rbp), %rcx # copies value of mid variable into register rcx in preperation for sortsub call
+	movq	-40(%rbp), %r8 # copies value of comp variable into register r8 in preperation for sortsub call
 	movq	%rax, %rdx # Replaces the value of left in rdx with the value of left from rax
 	callq	sortsub # Calls the sortsub function
 	# Parameters for second sortsub call:
-	movq	-8(%rbp), %rdi # Moves value of arr variable into register rdi in preperation for sortsub call
-	movq	-16(%rbp), %rsi # Moves value of size variable into register rsi in preperation for sortsub call
-	movq	-48(%rbp), %rdx # Moves value of mid variable into register rdx in preperation for sortsub call
-	movq	-32(%rbp), %rcx # Moves value of right variable into register rcx in preperation for sortsub call
-	movq	-40(%rbp), %r8 # Moves value of comp variable into register r8 in preperation for sortsub call
+	movq	-8(%rbp), %rdi # copies value of arr variable into register rdi in preperation for sortsub call
+	movq	-16(%rbp), %rsi # copies value of size variable into register rsi in preperation for sortsub call
+	movq	-48(%rbp), %rdx # copies value of mid variable into register rdx in preperation for sortsub call
+	movq	-32(%rbp), %rcx # copies value of right variable into register rcx in preperation for sortsub call
+	movq	-40(%rbp), %r8 # copies value of comp variable into register r8 in preperation for sortsub call
 	callq	sortsub # Calls the sortsub function
 	# Parameters for merge call:
-	movq	-8(%rbp), %rdi # Moves value of arr variable into register rdi in preperation for sortsub call
-	movq	-16(%rbp), %rsi # Moves value of size variable into register rsi in preperation for sortsub call
-	movq	-24(%rbp), %rdx # Moves value of left variable into register rdx in preperation for sortsub call
-	movq	-48(%rbp), %rcx # Moves value of mid variable into register rcx in preperation for sortsub call
-	movq	-32(%rbp), %r8 # Moves the value of right variable into register r8
-	movq	-40(%rbp), %r9 # Moves the value of the comp variable into register r9
+	movq	-8(%rbp), %rdi # copies value of arr variable into register rdi in preperation for sortsub call
+	movq	-16(%rbp), %rsi # copies value of size variable into register rsi in preperation for sortsub call
+	movq	-24(%rbp), %rdx # copies value of left variable into register rdx in preperation for sortsub call
+	movq	-48(%rbp), %rcx # copies value of mid variable into register rcx in preperation for sortsub call
+	movq	-32(%rbp), %r8 # copies the value of right variable into register r8
+	movq	-40(%rbp), %r9 # copies the value of the comp variable into register r9
 	callq	merge # Calls the merge function
 .LBB1_2:
 	addq	$64, %rsp # Stack pointer is incremented by 64 to deallocate the 64 bytes used by the sortsub stackframe
