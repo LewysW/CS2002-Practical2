@@ -25,7 +25,7 @@ void print_frame(long rbp, long rbp1, int frames) {
     //Repeat while the value of the address with the offset i is not equal to the current base pointer
     while ((rbp1 - i) != rbp) {
         //Prints address, offset and value of quadword
-        printf("%lx, -%i(%rbp), %li\n", (rbp1 - i), i,*((long*) (rbp1 - i)));
+        printf("%lx, -%i(%%rbp), %li\n", (rbp1 - i), i,*((long*) (rbp1 - i)));
         i += 8;
     }
 
