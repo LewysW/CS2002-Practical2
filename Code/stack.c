@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void print_frame(); //TODO split into function for printing
+void print_frame();
 
 /* Print three stack frames, of the three callers directly above.
  */
