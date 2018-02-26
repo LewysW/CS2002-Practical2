@@ -1,17 +1,17 @@
 	.text
 	.file	"sort.c"
 	.globl	mergesort
-	.p2align	4, 0x90
+	.align	16, 0x90
 	.type	mergesort,@function
 mergesort:
 	.cfi_startproc
 	pushq	%rbp
-.Lcfi0:
+.Ltmp0:
 	.cfi_def_cfa_offset 16
-.Lcfi1:
+.Ltmp1:
 	.cfi_offset %rbp, -16
 	movq	%rsp, %rbp
-.Lcfi2:
+.Ltmp2:
 	.cfi_def_cfa_register %rbp
 	subq	$48, %rsp
 	xorl	%eax, %eax
@@ -35,17 +35,17 @@ mergesort:
 	.size	mergesort, .Lfunc_end0-mergesort
 	.cfi_endproc
 
-	.p2align	4, 0x90
+	.align	16, 0x90
 	.type	sortsub,@function
 sortsub:
 	.cfi_startproc
 	pushq	%rbp
-.Lcfi3:
+.Ltmp3:
 	.cfi_def_cfa_offset 16
-.Lcfi4:
+.Ltmp4:
 	.cfi_offset %rbp, -16
 	movq	%rsp, %rbp
-.Lcfi5:
+.Ltmp5:
 	.cfi_def_cfa_register %rbp
 	subq	$64, %rsp
 	movq	%rdi, -8(%rbp)
@@ -97,17 +97,17 @@ sortsub:
 	.size	sortsub, .Lfunc_end1-sortsub
 	.cfi_endproc
 
-	.p2align	4, 0x90
+	.align	16, 0x90
 	.type	merge,@function
 merge:
 	.cfi_startproc
 	pushq	%rbp
-.Lcfi6:
+.Ltmp6:
 	.cfi_def_cfa_offset 16
-.Lcfi7:
+.Ltmp7:
 	.cfi_offset %rbp, -16
 	movq	%rsp, %rbp
-.Lcfi8:
+.Ltmp8:
 	.cfi_def_cfa_register %rbp
 	subq	$96, %rsp
 	movq	%rdi, -8(%rbp)
@@ -231,5 +231,5 @@ merge:
 	.cfi_endproc
 
 
-	.ident	"clang version 5.0.1 (tags/RELEASE_501/final)"
+	.ident	"clang version 3.8.0-2ubuntu4 (tags/RELEASE_380/final)"
 	.section	".note.GNU-stack","",@progbits

@@ -19,13 +19,19 @@
 	In the second section of the practical, the stack\_frame function runs an in-line assembly command to move the value stored in the base pointer register (rbp) into a local variable. This variable is then dereferenced to retrieve the value of the base pointer from the previous stack frame. My own function print\_frame is then called with the two base pointers and the number of stack frames to print as arguments. \\\\ The print\_frame function then iterates over the addresses between the previous base pointer and the current base pointer in increments of 8 bytes and prints out the address of each value, as well as its offset from the base pointer in bytes, and the value stored at the current address. The print\_frame function is then recursively called until there are no more frames to print.
 	\section{Analysis}
 		\subsection{Section 2 - Findings}
+			\begin{figure}
+				\includegraphics[scale=0.5]{Print_Stack_Output.png}
+				\caption{Output of print\_stack Function}
+			\end{figure}
+			
+			The above figure shows the terminal output of running the main-plus executable with the specified implementation of the print\_stack function. The output has been displayed in the suggested format of address, offset and value. For the most part the values output seem to correspond with values in the assembly and C code.\\\\ The first value in each stack frame is a decimal address which makes sense as it has an offset of 0 from the base pointer and therefore is the value at that current base pointer. The value in the first stack frame printed is decimal 140728960351232 which is the address of the middle stack frame in hex 7ffe03b0fc00. The second value (offset -8) is also a decimal address which corresponds to the void* array as the names of arrays in C are pointers to the first element of the array. The third, fourth and fifth values (offsets -16, -24 and -32) correspond to the size, left and right variables of type long. For the sixth value (offset -40) it appears to be the address pointing to the function comp\_long used to initialise the comp variable. However this is not certain. The seventh value output (offset -48) seems to be the value of mid which is being passed into subsort, subsort and merge respectively and is used to split the list into two smallers halves recursively. The eighth value (offset -56) is the same value as offset -24 which contains the value of left, this is because this location is where the value of left is stored before it is copied into register rcx for use in the calculation during the assignment of mid where mid = left + (right - left) / 2. 
 			\subsubsection{Comparison of sort0.s and sort-plus.s}
 		\subsection{Section 3}
-			\subsubsection{•}
-			\subsubsection{•}
-			\subsubsection{•}
-			\subsubsection{•}
+			\subsubsection{Word Size Analysis}
+			\subsubsection{Assembler Code for Comp Function Call}
+			\subsubsection{Implementation of a While-Loop in Assembler}
+			\subsubsection{Comparison of Sort Files}
 	\section{Evaluation}
 	\section{Conclusion}
-	\section{Extension}
+	\section{Section 4 - Extension}
 \end{document}

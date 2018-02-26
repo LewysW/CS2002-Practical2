@@ -1,7 +1,7 @@
 	.text
 	.file	"sort.c"
 	.globl	mergesort
-	.p2align	4, 0x90
+	.align	16, 0x90
 	.type	mergesort,@function
 mergesort:
 	.cfi_startproc
@@ -14,148 +14,157 @@ mergesort:
 	.size	mergesort, .Lfunc_end0-mergesort
 	.cfi_endproc
 
-	.p2align	4, 0x90
+	.align	16, 0x90
 	.type	sortsub,@function
 sortsub:
 	.cfi_startproc
 	pushq	%rbp
-.Lcfi0:
+.Ltmp0:
 	.cfi_def_cfa_offset 16
 	pushq	%r15
-.Lcfi1:
+.Ltmp1:
 	.cfi_def_cfa_offset 24
 	pushq	%r14
-.Lcfi2:
+.Ltmp2:
 	.cfi_def_cfa_offset 32
 	pushq	%r13
-.Lcfi3:
+.Ltmp3:
 	.cfi_def_cfa_offset 40
 	pushq	%r12
-.Lcfi4:
+.Ltmp4:
 	.cfi_def_cfa_offset 48
 	pushq	%rbx
-.Lcfi5:
+.Ltmp5:
 	.cfi_def_cfa_offset 56
-	subq	$56, %rsp
-.Lcfi6:
-	.cfi_def_cfa_offset 112
-.Lcfi7:
+	subq	$88, %rsp
+.Ltmp6:
+	.cfi_def_cfa_offset 144
+.Ltmp7:
 	.cfi_offset %rbx, -56
-.Lcfi8:
+.Ltmp8:
 	.cfi_offset %r12, -48
-.Lcfi9:
+.Ltmp9:
 	.cfi_offset %r13, -40
-.Lcfi10:
+.Ltmp10:
 	.cfi_offset %r14, -32
-.Lcfi11:
+.Ltmp11:
 	.cfi_offset %r15, -24
-.Lcfi12:
+.Ltmp12:
 	.cfi_offset %rbp, -16
-	movq	%r8, %r12
-	movq	%rcx, %rax
-	movq	%rsi, %rbx
-	movq	%rdi, %r15
-	movq	%rax, %rbp
-	subq	%rdx, %rbp
-	cmpq	$2, %rbp
-	jl	.LBB1_14
-	movq	%rbp, %r14
-	shrq	%r14
-	leaq	(%r14,%rdx), %r13
-	movq	%r15, %rdi
-	movq	%rbx, %rsi
-	movq	%rdx, 32(%rsp)
-	movq	%r13, %rcx
-	movq	%rax, 16(%rsp)
-	movq	%r12, %r8
+	movq	%rdx, %r14
+	movq	%rcx, %rbx
+	subq	%r14, %rbx
+	cmpq	$2, %rbx
+	jl	.LBB1_10
+	movq	%rbx, %r12
+	shrq	$63, %r12
+	addq	%rbx, %r12
+	sarq	%r12
+	addq	%r14, %r12
+	movq	%r12, 16(%rsp)
+	movq	%rdi, %rbp
+	movq	%rsi, %r13
+	movq	%r14, %rdx
+	movq	%rcx, 80(%rsp)
+	movq	%r12, %rcx
+	movq	%r8, %r15
 	callq	sortsub
-	movq	%r15, (%rsp)
-	movq	%r15, %rdi
-	movq	%rbx, %rsi
-	movq	%r13, %rdx
-	movq	16(%rsp), %rcx
-	movq	%r12, 48(%rsp)
-	movq	%r12, %r8
-	callq	sortsub
-	imulq	%rbx, %rbp
-	movq	%rbp, 40(%rsp)
 	movq	%rbp, %rdi
+	movq	%rbp, 24(%rsp)
+	movq	%r13, %rsi
+	movq	%r12, %rdx
+	movq	80(%rsp), %rcx
+	movq	%r15, %r8
+	movq	%r15, 48(%rsp)
+	callq	sortsub
+	imulq	%r13, %rbx
+	movq	%r13, %rbp
+	movq	%rbx, 8(%rsp)
+	movq	%rbx, %rdi
 	callq	malloc
-	movq	16(%rsp), %rdx
-	movq	%rax, 24(%rsp)
-	movq	%r13, 8(%rsp)
-	cmpq	%rdx, %r13
+	movq	%rax, 32(%rsp)
+	cmpq	80(%rsp), %r12
 	setl	%al
-	testq	%r14, %r14
-	setne	%cl
-	jne	.LBB1_3
-	cmpq	%rdx, 8(%rsp)
-	jge	.LBB1_13
+	movb	$1, %r15b
+	movq	%r12, %r13
+	movq	%r14, 40(%rsp)
+	movq	%r14, (%rsp)
+	xorl	%r14d, %r14d
+.LBB1_2:
+	movq	40(%rsp), %rdx
+	imulq	%rbp, %rdx
+	movq	24(%rsp), %rcx
+	addq	%rcx, %rdx
+	movq	%rdx, 56(%rsp)
+	movq	%rbp, %rdx
+	imulq	%r14, %rdx
+	addq	32(%rsp), %rdx
+	movq	%rdx, 64(%rsp)
+	movq	%rbp, %rdx
+	imulq	%r13, %rdx
+	addq	%rcx, %rdx
+	movq	%rdx, 72(%rsp)
+	xorl	%ebx, %ebx
+	movq	%r14, %r12
+	.align	16, 0x90
 .LBB1_3:
-	movq	24(%rsp), %r14
-	movq	8(%rsp), %r13
-	movq	32(%rsp), %rbp
-	.p2align	4, 0x90
-.LBB1_4:
 	testb	$1, %al
-	je	.LBB1_5
-	testb	$1, %cl
-	je	.LBB1_7
-	movq	%rbp, %r15
-	imulq	%rbx, %r15
-	movq	(%rsp), %rax
-	addq	%rax, %r15
-	movq	%r13, %r12
-	imulq	%rbx, %r12
-	addq	%rax, %r12
-	movq	%r15, %rdi
-	movq	%r12, %rsi
+	je	.LBB1_6
+	movq	72(%rsp), %rax
+	leaq	(%rax,%rbx), %r14
+	testb	$1, %r15b
+	je	.LBB1_8
+	movq	56(%rsp), %rdi
+	movq	%r14, %rsi
 	callq	*48(%rsp)
 	testq	%rax, %rax
-	jg	.LBB1_8
-	jmp	.LBB1_10
-	.p2align	4, 0x90
-.LBB1_5:
-	movq	%rbp, %r15
-	imulq	%rbx, %r15
-	addq	(%rsp), %r15
-.LBB1_10:
-	incq	%rbp
-	movq	%r14, %rdi
-	movq	%r15, %rsi
-	jmp	.LBB1_11
-	.p2align	4, 0x90
-.LBB1_7:
-	movq	%r13, %r12
-	imulq	%rbx, %r12
-	addq	(%rsp), %r12
+	jle	.LBB1_6
 .LBB1_8:
+	incq	%r12
 	incq	%r13
-	movq	%r14, %rdi
-	movq	%r12, %rsi
-.LBB1_11:
-	movq	%rbx, %rdx
+	movq	64(%rsp), %rax
+	leaq	(%rax,%rbx), %rdi
+	movq	%r14, %rsi
+	movq	%rbp, %rdx
 	callq	memcpy
-	movq	16(%rsp), %rdx
-	cmpq	%rdx, %r13
+	cmpq	80(%rsp), %r13
 	setl	%al
-	addq	%rbx, %r14
-	cmpq	8(%rsp), %rbp
-	setl	%cl
-	jl	.LBB1_4
-	cmpq	%rdx, %r13
-	jl	.LBB1_4
-.LBB1_13:
-	movq	32(%rsp), %rax
-	imulq	%rbx, %rax
-	movq	(%rsp), %rdi
+	movb	%r15b, %cl
+	orb	%al, %cl
+	addq	%rbp, %rbx
+	testb	$1, %cl
+	jne	.LBB1_3
+	jmp	.LBB1_9
+	.align	16, 0x90
+.LBB1_6:
+	leaq	1(%r12), %r14
+	imulq	%rbp, %r12
+	addq	32(%rsp), %r12
+	movq	40(%rsp), %rbx
+	incq	%rbx
+	movq	%rbx, 40(%rsp)
+	movq	%r12, %rdi
+	movq	56(%rsp), %rsi
+	movq	%rbp, %rdx
+	callq	memcpy
+	cmpq	80(%rsp), %r13
+	setl	%al
+	cmpq	16(%rsp), %rbx
+	setl	%r15b
+	jl	.LBB1_2
+	cmpq	80(%rsp), %r13
+	jl	.LBB1_2
+.LBB1_9:
+	movq	(%rsp), %rax
+	imulq	%rbp, %rax
+	movq	24(%rsp), %rdi
 	addq	%rax, %rdi
-	movq	24(%rsp), %rbx
+	movq	32(%rsp), %rbx
 	movq	%rbx, %rsi
-	movq	40(%rsp), %rdx
+	movq	8(%rsp), %rdx
 	callq	memcpy
 	movq	%rbx, %rdi
-	addq	$56, %rsp
+	addq	$88, %rsp
 	popq	%rbx
 	popq	%r12
 	popq	%r13
@@ -163,8 +172,8 @@ sortsub:
 	popq	%r15
 	popq	%rbp
 	jmp	free
-.LBB1_14:
-	addq	$56, %rsp
+.LBB1_10:
+	addq	$88, %rsp
 	popq	%rbx
 	popq	%r12
 	popq	%r13
@@ -177,5 +186,5 @@ sortsub:
 	.cfi_endproc
 
 
-	.ident	"clang version 5.0.1 (tags/RELEASE_501/final)"
+	.ident	"clang version 3.8.0-2ubuntu4 (tags/RELEASE_380/final)"
 	.section	".note.GNU-stack","",@progbits
