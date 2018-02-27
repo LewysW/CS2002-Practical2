@@ -17,6 +17,7 @@ static void merge(void* arr, long size, long left, long mid, long right,
 	long p1 = left;
 	long p2 = mid;
 	long p3 = 0;
+
 	while (p1 < mid || p2 < right)
 		if (p2 >= right || (p1 < mid && comp(arr + size * p1, arr + size * p2) <= 0))
 			memcpy(tmp + size * p3++, arr + size * p1++, size);
@@ -35,7 +36,7 @@ static void merge(void* arr, long size, long left, long mid, long right,
  */
 static void sortsub(void* arr, long size, long left, long right,
 		long (*comp)(const void*, const void*)) {
-			
+
 	if (right - left > 1) {
 		long mid = left + (right-left) / 2;
 		sortsub(arr, size, left, mid, comp);

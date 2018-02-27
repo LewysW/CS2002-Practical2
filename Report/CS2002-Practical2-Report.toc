@@ -3,11 +3,11 @@
 \contentsline {section}{\numberline {3}Analysis}{5}
 \contentsline {subsection}{\numberline {3.1}Section 2 - Findings}{5}
 \contentsline {subsubsection}{\numberline {3.1.1}Comparison of sort0.s and sort-plus.s}{6}
-\contentsline {subsection}{\numberline {3.2}Section 3}{6}
-\contentsline {subsubsection}{\numberline {3.2.1}Word Size Analysis}{6}
-\contentsline {subsubsection}{\numberline {3.2.2}Assembler Code for Comp Function Call}{6}
-\contentsline {subsubsection}{\numberline {3.2.3}Implementation of a While-Loop in Assembler}{6}
-\contentsline {subsubsection}{\numberline {3.2.4}Comparison of Sort Files}{6}
-\contentsline {section}{\numberline {4}Evaluation}{6}
-\contentsline {section}{\numberline {5}Conclusion}{6}
-\contentsline {section}{\numberline {6}Section 4 - Extension}{6}
+\contentsline {subsection}{\numberline {3.2}Section 3}{7}
+\contentsline {subsubsection}{\numberline {3.2.1}Word Size Analysis}{7}
+\contentsline {subsubsection}{\numberline {3.2.2}Assembler Code for Comp Function Call}{7}
+\contentsline {subsubsection}{\numberline {3.2.3}Implementation of a While-Loop in Assembler}{7}
+\contentsline {subsubsection}{\numberline {3.2.4}Comparison of Sort Files}{7}
+\contentsline {section}{\numberline {4}Evaluation}{7}
+\contentsline {section}{\numberline {5}Conclusion}{7}
+\contentsline {section}{\numberline {6}Section 4 - Extension}{7}
